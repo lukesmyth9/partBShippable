@@ -5,6 +5,8 @@
  */
 package com.mycompany.softwareengassignment1;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author lukej
@@ -13,15 +15,15 @@ public class Module {
     
     String moduleName;
     String ID;
-    Course[] courses;
-    Student[] students;
+    ArrayList<Course> courses = new ArrayList<Course>();
+    ArrayList<Student> students = new ArrayList<Student>();
     
-    public Module(String moduleName, String ID, Course[] courses, Student[] students)
+    public Module(String moduleName, String ID)
     {
         this.moduleName = moduleName;
         this.ID = ID;
-        this.students = students;
-        this.courses = courses;
+        //this.students = students;
+        //this.courses = courses;
     }
 
 //Mutators
@@ -34,14 +36,7 @@ public void setID(String ID)
 {
     this.ID = ID;
 }
-public void setCourses(Course[] courses)
-{
-    this.courses = courses;
-}
-public void setStudents(Student[] students)
-{
-    this.students = students;
-}
+
 //Accessors
 public String getModuleName()
 {
@@ -51,17 +46,35 @@ public String getID()
 {
     return this.ID;
 }
-public Course[] getCourses()
+public void addStudentToModule(Student student)
 {
-    return this.courses;
+    students.add(student);
 }
-public Student[] getStudents()
+public void addCourseToModule(Course course)
 {
-    return this.students;
+    courses.add(course);
 }
-
-
-
-
-
+public void printStudents()
+{
+    System.out.println("Students enrolled in this module: ");
+    for (Student student : students)
+    {
+        System.out.println("Name: " + student.getName() + " Username: " + student.getUsername());
+    }
+}
+public void printCourses()
+{
+    System.out.println("Courses that are in this module: ");
+    for (Course course : courses)
+    {
+        System.out.println("Name: " + course.getCourseName());
+    }
+}
+public void moduleInformation(Module module)
+{
+    System.out.println("Module Name: " + module.getModuleName() + "\nModule ID: " + module.getID() + "\n");
+    module.printCourses();
+    System.out.println("\n");
+    module.printStudents();
+}
 }

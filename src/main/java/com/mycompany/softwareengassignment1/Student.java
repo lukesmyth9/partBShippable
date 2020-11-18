@@ -4,30 +4,32 @@
  * and open the template in the editor.
  */
 package com.mycompany.softwareengassignment1;
-
+import java.util.ArrayList;
+import org.joda.time.*;
 /**
  *
  * @author lukej
  */
 public class Student {
     //instance variables
-    Course[] courses;
-    Module[] modules;
-    
+    //Course[] courses;
+    //Module[] modules;
+    ArrayList<Module> modules = new ArrayList<Module>();
+    ArrayList<Course> courses = new ArrayList<Course>();
     String name;
     int age;
-    String dateOfBirth;
+    LocalDate dateOfBirth;
     int ID;
     String username;
    
-    public Student(String name, int age, String dateOfBirth, int ID, Course[] courses, Module[] modules)
+    public Student(String name, int age, String dateOfBirth, int ID)
     {
         this.name = name;
         this.age = age;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = new LocalDate(dateOfBirth);
         this.ID = ID;
-        this.courses = courses;
-        this.modules = modules;
+       // this.courses = courses;
+        //this.modules = modules;
     }
     
 //Mutator methods
@@ -40,23 +42,11 @@ public void setAge(int age)
 {
     this.age = age;
 }
-public void setDateOfBirth(String dateOfBirth)
-{
-    this.dateOfBirth = dateOfBirth;
-}
+
 public void setID(int ID)
 {
     this.ID = ID;
 }
-public void setCourses(Course[] courses)
-{
-    this.courses = courses;
-}
-public void setModules(Module[] modules)
-{
-    this.modules = modules;
-}
-
 
     //getters
 public String getName()
@@ -67,21 +57,13 @@ public int getAge()
 {
     return this.age;
 }
-public String getDateOfBirth()
+public LocalDate getDateOfBirth()
 {
-    return this.dateOfBirth;        
+    return dateOfBirth;        
 }
 public int getID()
 {
     return this.ID;
-}
-public Course[] getCourses()
-{
-    return this.courses;
-}
-public Module[] getModules()
-{
-    return this.modules;
 }
 
 public String getUsername() 
@@ -89,7 +71,36 @@ public String getUsername()
     this.username = this.name + this.age;    
     return username;
 }
-   
+    public void addModuleToStudent(Module module)
+    {
+        modules.add(module);
+    }
+    public void printAssignedCoursesToStudent()
+    {
+        System.out.println("The student is in this course: ");
+        for(Course course : courses)
+        {
+            System.out.println("Name: " + course.getCourseName() + "\n");
+        }
+    }
+    public void printAssignedModulesToStudents()
+    {
+        System.out.println("This student has the following modules: ");
+        for(Module module : modules)
+        {
+            System.out.println("Module Name: " + module.getModuleName() + " Module ID: " + module.getID());
+        }
+    }
+    public void addCourseToStudent(Course course)
+    {
+        courses.add(course);
+    }
+    public void studentInformation(Student student)
+    {
+        System.out.println("Student Name: " + student.getName() + "\nUsername: " + student.getUsername() + "\nAge: " + student.getAge() + "\nDate of birth: " + student.getDateOfBirth());
+        student.printAssignedCoursesToStudent();
+        student.printAssignedModulesToStudents();
+    }
     
     
 }

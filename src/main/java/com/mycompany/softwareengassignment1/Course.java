@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package com.mycompany.softwareengassignment1;
-import org.joda.time.DateTime;
+import java.util.*;
+import org.joda.time.*;
 /**
  *
  * @author lukej
@@ -12,18 +13,18 @@ import org.joda.time.DateTime;
 public class Course {
     
     String courseName;
-    Module[] modules;
-    Student[] students;
-    DateTime startDate;
-    DateTime endDate;
-    
-    public Course(String courseName, Module[] modules, Student[] students, DateTime startDate, DateTime endDate)
+    ArrayList<Module> modules = new ArrayList<Module>();
+    ArrayList<Student> students = new ArrayList<Student>();
+    LocalDate startDate;
+    LocalDate endDate;
+    //constructor
+    public Course(String courseName, String startDate, String endDate)
     {
         this.courseName = courseName;
-        this.modules = modules;
-        this.students = students;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        //this.modules = modules;
+        //this.students = students;
+        this.startDate = new LocalDate(startDate);
+        this.endDate = new LocalDate(endDate);
     }
     
     //Mutator methods
@@ -32,45 +33,52 @@ public class Course {
         this.courseName = courseName;
     }
     
-    public void setModules(Module[] modules)
-    {
-        this.modules = modules;
-    }
-    
-    public void setStudents(Student[] students)
-    {
-        this.students = students;
-    }
-    
-    public void SetStartDate(DateTime startDate)
-    {
-        this.startDate = startDate;
-    }
-    public void setEndDate(DateTime endDate)
-    {
-        this.endDate = endDate;
-    }
-    
     //Accessor Methods
-    public String getCoyrseName()
+    public String getCourseName()
     {
         return this.courseName;
     }
-    public Module[] getModules()
+    public void addStudent(Student student)
     {
-        return this.modules;
+        students.add(student);
     }
-    public Student[] getStudents()
+    public void printStudentsEnrolled()
     {
-        return this.students;
+        System.out.println("The following students are enrolled in this course: ");
+        for(Student student : students)
+        {
+            System.out.println("Name: " + student.getName() + " Username: " + student.getUsername());
+        }
     }
-    public DateTime getStartDate()
+    public void printModules()
+    {
+        System.out.println("The following Modules are enrolled in this course: ");
+        for(Module module : modules)
+        {
+            System.out.println("Module Name: " + module.getModuleName() + " Module ID: " + module.getID());
+        }
+    }
+    public void addModule(Module module)
+    {
+        modules.add(module);
+    }
+    
+    public LocalDate getStartDate()
     {
         return this.startDate;
     }
-    public DateTime getEndDate()
+    public LocalDate getEndDate()
     {
         return this.endDate;
+    }
+    
+    
+    public void courseInformation(Course course)
+    {
+        System.out.println("Course Name: " + course.getCourseName() + "\nStart Date: " + course.getStartDate() + "\nEnd Date: " + course.getEndDate() + "\n");
+       course.printStudentsEnrolled();
+   System.out.println("\n");
+       course.printModules();
     }
     
 }
