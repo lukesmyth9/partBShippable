@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Module {
     
+    
     String moduleName;
     String ID;
     ArrayList<Course> courses = new ArrayList<Course>();
